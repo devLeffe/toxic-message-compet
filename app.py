@@ -1,9 +1,5 @@
-
-
 import streamlit as st
 import tensorflow as tf
-import json
-from tensorflow.keras.preprocessing.sequence import pad_sequences
 import pickle
 import pandas as pd
 
@@ -35,7 +31,7 @@ def predict():
     model, tokenizer = load_model()
 
     text_preprocessing = tokenizer.texts_to_sequences([txt])
-    text_preprocessing_pad = pad_sequences(text_preprocessing, maxlen=150)
+    text_preprocessing_pad = tf.keras.preprocessing.sequence.pad_sequences(text_preprocessing, maxlen=150)
     # text_preprocessing_pad
     print(model.predict(text_preprocessing_pad))
     return model.predict(text_preprocessing_pad)[0]
